@@ -6,12 +6,10 @@
 #include<math.h>
 #include<string.h>
 #include<stdbool.h>
+#include <ctype.h>
 #ifndef CALCFIXE_H
 #define CALCFIXE_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
 
 // Define the node structure
 typedef struct Node {
