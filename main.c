@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include"calcfixe_helper.h"
 int main() {
+
     printf("Bienvenue sur le calculateur!\n");
     printf("Voici ce que ce calculateur peut faire:\n");
     printf("1. Ajouter (ADD)\n");
@@ -27,8 +28,25 @@ int main() {
     while (1) {
         display();
         printf("\n");
-        fgets(input, sizeof(input), stdin); // Get the input from the user
-        input_handler(input); // Pass it to the input handler for processing
+        fgets(input, sizeof(input), stdin);
+        input_handler(input);
     }
     return 0;
+
+    /*
+
+    push(10);
+    push(20);
+    printf("Main stack after pushing 10 and 20:\n");
+    display();
+
+
+    sauvegarder();
+    display();
+
+    rappeler();
+    printf("Main stack after recalling the saved value:\n");
+    display();
+    return 0;
+*/
 }

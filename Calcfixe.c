@@ -4,160 +4,155 @@
 #include "Calcfixe.h"
 
 
-sommet main_stack = NULL;  // Initialize main_stack to NULL
-sommet save_stack = NULL;  // Initialize save_stack to NULL
-// Function to create a new node
+sommet main_stack = NULL;
+sommet save_stack = NULL;
+// Fonction pour créer un nouveau nœud
 sommet newNode(float data) {
-    sommet node = (sommet)malloc(sizeof(Node)); // Allocate memory for the new node
+    sommet node = (sommet)malloc(sizeof(Node));
     if (node == NULL) {
-        printf("Node creation failure!!! Memory allocation failed\n");
-        exit(EXIT_FAILURE); // Exit if memory allocation fails
+        printf("Échec de la création du nœud!!! Allocation de mémoire échouée\n");
+        exit(EXIT_FAILURE);
     }
     node->data = data;
     node->next = NULL;
     return node;
 }
 
-// Function to check if the stack is empty
+// Fonction pour vérifier si la pile est vide
 bool is_empty() {
-    return (main_stack == NULL); // Stack is empty if the top pointer is NULL
+    return (main_stack == NULL);
 }
 
-// Function to push data onto the stack
+// Fonction pour ajouter des données dans la pile
 void push(float data) {
-    sommet node = newNode(data); // Create a new node
-    node->next = main_stack;    // Link the new node to the current top
-    main_stack = node;          // Update the top pointer
+    sommet node = newNode(data);
+    node->next = main_stack;
+    main_stack = node;
 }
 
-// Function to pop data from the stack
+// Fonction pour retirer des données de la pile
 float pop() {
     if (is_empty()) {
-        printf("Stack underflow\n");
-        exit(EXIT_FAILURE); // Exit if pop is attempted on an empty stack
+        printf("Poussée vide\n");
+        exit(EXIT_FAILURE);
     }
-    sommet temp = main_stack;      // Temporary pointer to the top node
-    float poppedData = temp->data; // Retrieve data from the top node
-    main_stack = temp->next;       // Update the top pointer to the next node
-    free(temp);                    // Free the memory of the popped node
-    return poppedData;             // Return the popped data
+    sommet temp = main_stack;
+    float poppedData = temp->data;
+    main_stack = temp->next;
+    free(temp);
+    return poppedData;
 }
 
-// Function to display the stack
+// Fonction pour afficher le contenu de la pile
 void display() {
     if (is_empty()) {
-        printf("Stack is empty\n");
+        printf("La pile est vide\n");
         return;
     }
-    sommet temp = main_stack; // Temporary pointer to traverse the stack
-    printf("Stack contents:\n");
+    sommet temp = main_stack;
+    printf("Contenu de la pile :\n");
     while (temp != NULL) {
-        printf("%.2f\n", temp->data); // Print data in the current node
-        temp = temp->next;           // Move to the next node
+        printf("%.2f\n", temp->data);
+        temp = temp->next;
     }
 }
 
-// Function to get the top element of the stack
+// Fonction pour obtenir l'élément du sommet de la pile
 float result() {
     if (is_empty()) {
-        printf("Stack is empty\n");
-         // Exit if the stack is empty
+        printf("La pile est vide\n");
+         // Sortie si la pile est vide
     }
-    return main_stack->data; // Return the data at the top
+    return main_stack->data;
 }
 
-// Function to delete the top node
+// Fonction pour supprimer un nœud
 void delete_node() {
     if (is_empty()) {
-        printf("Stack is empty, nothing to delete\n");
-        return; // No action if the stack is empty
+        printf("La pile est vide, rien à supprimer\n");
+        return;
     }
-    sommet temp = main_stack; // Temporary pointer to the top node
-    main_stack = temp->next;  // Update the top pointer to the next node
-    free(temp);               // Free the memory of the removed node
+    sommet temp = main_stack;
+    main_stack = temp->next;
+    free(temp);
 }
 
-// Function to delete all nodes in the stack
+// Fonction pour supprimer tous les nœuds de la pile
 void delete_all() {
     while (!is_empty()) {
-        delete_node(); // Repeatedly delete the top node until the stack is empty
+        delete_node();
     }
-    printf("All nodes deleted, stack is now empty\n");
+    printf("Tous les nœuds ont été supprimés, la pile est maintenant vide\n");
 }
 
-// Function to transfer from main_stack to save_stack
+// Fonction pour transférer de main_stack à save_stack
 void sauvegarder() {
     if (is_empty()) {
-        printf("main_stack is empty, nothing to save\n");
+        printf("main_stack est vide\n");
         return;
     }
-    float value = pop(); // Pop the top value from main_stack
-    sommet new_node = newNode(value); // Create a new node with the popped value
-    new_node->next = save_stack; // Link it to the current save_stack
-    save_stack = new_node; // Update the save_stack top
-    printf("Saved value: %.2f\n", value);
+    float value = pop();
+    sommet new_node = newNode(value);
+    new_node->next = save_stack;
+    save_stack = new_node;
+
+    printf("Valeur sauvegardee : %.2f\n", value);
 }
 
-// Function to transfer the top value from save_stack to main_stack
+// Fonction pour transférer la valeur du sommet de save_stack à main_stack
 void rappeler() {
     if (save_stack == NULL) {
-        printf("save_stack is empty, nothing to recall\n");
+        printf("save_stack est vide\n");
         return;
     }
-    sommet temp = save_stack; // Pointer to the top node of save_stack
-    float value = temp->data; // Get the value
-    save_stack = temp->next; // Update save_stack top to the next node
-    free(temp); // Free the popped node
-    push(value); // Push the recalled value onto main_stack
-    printf("Recalled value: %.2f\n", value);
+    sommet temp = save_stack;
+    float value = temp->data;
+    save_stack = temp->next;
+    free(temp);
+    push(value);
+    printf("Valeur rappelee : %.2f\n", value);
 }
+
+// Fonction pour calculer les opérations binaires
 float calculer_binop(char op, float a, float b) {
     switch(op) {
         case '+':
-            return a + b;  // Addition
+            return a + b;
         case '-':
-            return a - b;  // Subtraction
+            return a - b;
         case '*':
-            return a * b;  // Multiplication
+            return a * b;
         case '/':
-            if (b != 0) {
-                return a / b;  // Division, check for division by zero
-            } else {
-                return nan("");  // Return NaN for division by zero
-            }
+                return a / b;
+
         case '^':
-            return pow(a, b);  // Power operation (a raised to the power of b)
+            return pow(a, b);
         default:
-            return nan("");  // Return NaN for an invalid operator
+            return ;
     }
 }
+
+// Fonction pour calculer les opérations unaires
 float calculer_unop(char op, float a) {
     switch(op) {
-        case 'N':  // NEG: Negation
+        case 'N':  // NEG: Négation
             return -a;
-        case 'A':  // VALABS: Absolute value
+        case 'A':  // VALABS: Valeur absolue
             return fabs(a);
-        case 'S':  // SQRT: Square root
-            if (a >= 0) {
-                return sqrt(a);  // Square root, check for negative value
-            } else {
-                return nan("");  // Return NaN for negative values
-            }
-        case 'I':  // SIN: Sine
-            return sin(a);  // Sine of a (in radians)
-        case 'C':  // COS: Cosine
-            return cos(a);  // Cosine of a (in radians)
-        case 'T':  // TAN: Tangent
-            return tan(a);  // Tangent of a (in radians)
-        case 'L':  // LOG: Natural logarithm
-            if (a > 0) {
-                return log(a);  // Logarithm of a
-            } else {
-                return nan("");  // Return NaN for non-positive values
-            }
-        case 'E':  // EXP: Exponential
-            return exp(a);  // Exponential function e^a
+        case 'S':  // SQRT: Racine carrée
+                return sqrt(a);
+
+        case 'I':
+            return sin(a);
+        case 'C':
+            return cos(a);
+        case 'T':
+            return tan(a);
+        case 'L':
+            return log(a);
+        case 'E':
+            return exp(a);
         default:
-            return nan("");  // Return NaN for an invalid operator
+            return ;
     }
 }
