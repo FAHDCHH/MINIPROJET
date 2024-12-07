@@ -7,6 +7,7 @@
 #include<string.h>
 #include<stdbool.h>
 #include <ctype.h>
+
 #ifndef CALCFIXE_H
 #define CALCFIXE_H
 

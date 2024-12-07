@@ -5,7 +5,7 @@
 #include "Calcfixe.h"
 #ifndef CALCFIXE_HELPER_H
 #define CALCFIXE_HELPER_H
-void input_cleaner(void);
+char* input_cleaner(char input[]);
 void toLowerCase(char *str);
 void enter(char input[]);
 void input_handler(char input[]);
