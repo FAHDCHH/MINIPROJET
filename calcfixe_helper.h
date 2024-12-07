@@ -1,6 +1,12 @@
 //
 // Created by FAHD on 07/12/2024.
 //
+/* Ce header file, calcfixe_helper.h, contient les déclarations des fonctions
+ auxiliaires utilisées par le programme Calcfixe. Il permet d'organiser le code
+ pour le rendre plus clair et facile à maintenir.
+ Les fonctions définies ici servent à gérer le traitement des entrées,
+ ainsi que les opérations unaires et binaires.
+ */
 #include <string.h>
 #include "Calcfixe.h"
 #ifndef CALCFIXE_HELPER_H

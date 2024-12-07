@@ -1,6 +1,15 @@
 //
 // Created by FAHD on 24/11/2024.
 //
+/*
+Ce header file, Calcfixe.h, contient les déclarations des structures et des fonctions
+utilisées pour implémenter une calculatrice basée sur des piles. Il définit également des variables
+globales nécessaires à la gestion des piles principales et secondaires.
+
+Les fonctions déclarées ici permettent de gérer les opérations sur les piles,
+telles que l'ajout, la suppression, l'affichage des éléments, et le traitement des
+opérations mathématiques (unaires et binaires).
+*/
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
