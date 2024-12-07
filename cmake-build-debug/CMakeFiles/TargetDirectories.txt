@@ -1,0 +1,3 @@
+C:/Users/FAHD/CLionProjects/MINIPROJET/cmake-build-debug/CMakeFiles/MINIPROJET.dir
+C:/Users/FAHD/CLionProjects/MINIPROJET/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/FAHD/CLionProjects/MINIPROJET/cmake-build-debug/CMakeFiles/rebuild_cache.dir
