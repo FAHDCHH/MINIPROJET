@@ -61,7 +61,7 @@ void display() {
 float result() {
     if (is_empty()) {
         printf("Stack is empty\n");
-        exit(EXIT_FAILURE); // Exit if the stack is empty
+         // Exit if the stack is empty
     }
     return main_stack->data; // Return the data at the top
 }

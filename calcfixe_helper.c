@@ -25,46 +25,44 @@ void input_handler(char input[]) {
     if (strncmp(cleaned_input, "ENTER", 5) == 0) {
         enter(cleaned_input);
 
-    }else if (strncmp(cleaned_input, "CLR", 3) == 0) {
-        if(!is_empty()) {
-           delete_all();
-        }else {
-            printf("Stack is already empty!!!\n");
-        }
-
-    }else if (strncmp(cleaned_input, "EXIT", 5) == 0) {
-        printf("GOODBYE!!!! SEE YOU NEXT TIME!\n");
-        exit(1);
-    }
-    else if (strncmp(cleaned_input, "CLRLAST", 7) == 0) {
+    }else if (strncmp(cleaned_input, "CLRLAST", 7) == 0) {
         if (!is_empty()) {
             delete_node();
         }else {
             printf("Stack is already empty!\n");
         }
+        }else if (strncmp(cleaned_input, "CLR", 3) == 0) {
+            if(!is_empty()) {
+                delete_all();
+            }else {
+                printf("Stack is already empty!!!\n");
+            }
+            }else if (strncmp(cleaned_input, "EXIT", 4) == 0) {
+        printf("GOODBYE!!!! SEE YOU NEXT TIME!\n");
+        exit(1);
+
 
     }else if (strncmp(cleaned_input, "RESUL", 5) == 0) {
         printf("RESULT IS:%.2f  ",result());
-    } else if (strcmp(cleaned_input, "LOG") == 0 ||
-               strcmp(cleaned_input, "NEG") == 0 ||
-               strcmp(cleaned_input, "VALABS") == 0 ||
-               strcmp(cleaned_input, "SQRT") == 0 ||
-               strcmp(cleaned_input, "SIN") == 0 ||
-               strcmp(cleaned_input, "COS") == 0 ||
-               strcmp(cleaned_input, "TAN") == 0 ||
-               strcmp(cleaned_input, "EXP") == 0 ||
-               strcmp(cleaned_input, "LN") == 0 ||
-               strcmp(cleaned_input, "SQR") == 0) {
-        Unary_op(cleaned_input);
-               } else if (strcmp(cleaned_input, "ADD") == 0 ||
-                          strcmp(cleaned_input, "SUB") == 0 ||
-                          strcmp(cleaned_input, "MUL") == 0 ||
-                          strcmp(cleaned_input, "DIV") == 0 ||
-                          strcmp(cleaned_input, "POW") == 0) {
-                   Binary_op(cleaned_input);
-                          } else {
-                              printf("Unknown command: %s\n", cleaned_input);
-                          }
+    } else if (strncmp(cleaned_input, "LOG",3) == 0 ||
+               strncmp(cleaned_input, "NEG",3) == 0 ||
+               strncmp(cleaned_input, "VALABS",6) == 0 ||
+               strncmp(cleaned_input, "SQRT",4) == 0 ||
+               strncmp(cleaned_input, "SIN",3) == 0 ||
+               strncmp(cleaned_input, "COS",3) == 0 ||
+               strncmp(cleaned_input, "TAN",3) == 0 ||
+               strncmp(cleaned_input, "EXP",3) == 0)
+                {
+               Unary_op(cleaned_input);
+    } else if (strncmp(cleaned_input, "SUM",3) == 0 ||
+                strncmp(cleaned_input, "SUB",3) == 0 ||
+                strncmp(cleaned_input, "MUL",3) == 0 ||
+                strncmp(cleaned_input, "DIV",3) == 0 ||
+                strncmp(cleaned_input, "POW",3) == 0) {
+                Binary_op(cleaned_input);
+    } else {
+            printf("Unknown command: %s\n", cleaned_input);
+    }
 }
 
 
@@ -76,21 +74,21 @@ void enter(char input[]) {
 
 void Unary_op(char input[]) {
     int op = pop();
-    if (strcmp(input, "LOG") == 0) {
+    if (strncmp(input, "LOG",3) == 0) {
         push(calculer_unop('L',op));
-    } else if (strcmp(input, "NEG") == 0) {
+    } else if (strncmp(input, "NEG",3) == 0) {
         push(calculer_unop('N',op));
-    } else if (strcmp(input, "VALABS") == 0) {
-        push(calculer_unop('V',op));
-    } else if (strcmp(input, "SQRT") == 0) {
+    } else if (strncmp(input, "VALABS",6) == 0) {
+        push(calculer_unop('A',op));
+    } else if (strncmp(input, "SQRT",4) == 0) {
         push(calculer_unop('S',op));
-    } else if (strcmp(input, "SIN") == 0) {
+    } else if (strncmp(input, "SIN",3) == 0) {
         push(calculer_unop('I',op));
-    } else if (strcmp(input, "COS") == 0) {
+    } else if (strncmp(input, "COS",3) == 0) {
         push(calculer_unop('C',op));
-    } else if (strcmp(input, "TAN") == 0) {
+    } else if (strncmp(input, "TAN",3) == 0) {
         push(calculer_unop('T',op));
-    } else if (strcmp(input, "EXP") == 0) {
+    } else if (strncmp(input, "EXP",3) == 0) {
         push(calculer_unop('E',op));
     }else {
         printf("Unknown unary operation "
@@ -103,20 +101,23 @@ void Binary_op(char input[]) {
         float op1 = pop();
         if (!is_empty()) {
             float op2 = pop();
-             if (strcmp(input, "ADD") == 0) {
-                push(calculer_binop("+",op1,op2));
-             } else if (strcmp(input, "SUB") == 0) {
-                 push(calculer_binop("-",op1,op2));
+             if (strncmp(input, "SUB",3) == 0) {
+                 push(calculer_binop('-',op1,op2));
 
-             } else if (strcmp(input, "MUL") == 0) {
-                 push(calculer_binop("*",op1,op2));
-             } else if (strcmp(input, "DIV") == 0) {
+             }else if(strncmp(input, "SUM",3) == 0) {
+                push(calculer_binop('+',op1,op2));
+             }else if (strncmp(input, "MUL",3) == 0) {
+                 push(calculer_binop('*',op1,op2));
+             } else if (strncmp(input, "DIV",3) == 0) {
                  if (op2 != 0) {
-                     push(calculer_binop("/",op1,op2));
+                     push(calculer_binop('/',op1,op2));
+                 }else {
+                     printf("Division by zero!!!\n");
+                     return;
                  }
 
-             } else if (strcmp(input, "POW") == 0) {
-                 push(calculer_binop("^",op1,op2));
+             } else if (strncmp(input, "POW",3) == 0) {
+                 push(calculer_binop('^',op1,op2));
              } else {
                     printf("Unknown binary operation: %s\n", input);
              }
